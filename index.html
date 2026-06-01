@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Janice Singh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f0;
+      --gray: #888;
+      --light-gray: #1a1a1a;
+      --accent: #8c6b8f;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 60px;
+      background: transparent;
+      transition: background 0.4s;
+    }
+    nav.scrolled { background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 42px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 60px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.07) 0%, transparent 60%),
+                  linear-gradient(160deg, #111 0%, #0a0a0a 100%);
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      font-weight: 500;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(245,245,240,0.65);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 15px 42px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.25s, color 0.25s;
+    }
+    .hero-cta:hover { background: var(--accent); color: var(--black); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      right: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      z-index: 1;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: var(--white);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 120px 60px; }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 52px;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--black); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+    }
+
+    .about-image {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201,169,110,0.15);
+    }
+    .about-image-placeholder {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(201,169,110,0.15);
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(245,245,240,0.7);
+      margin-bottom: 24px;
+    }
+    .about-text p strong { color: var(--white); font-weight: 600; }
+    .about-text .section-label { color: var(--accent); font-size: 0.68rem; letter-spacing: 0.3em; }
+
+    .about-stats {
+      display: flex;
+      gap: 52px;
+      margin-top: 52px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.45);
+      margin-top: 6px;
+    }
+
+    /* ── EXPERTISE ── */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 0;
+      max-width: 1100px;
+    }
+
+    .expertise-card {
+      background: var(--light-gray);
+      padding: 52px 40px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .expertise-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .expertise-card:hover { background: #1e1e1e; }
+    .expertise-card:hover::before { width: 100%; }
+
+    .card-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0.6;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(245,245,240,0.5);
+    }
+
+    /* ── MY WORK ── */
+    #work { background: var(--light-gray); }
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      max-width: 1100px;
+    }
+    .work-card {
+      background: var(--black);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .work-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .work-card:hover { background: #111; }
+    .work-card:hover::before { width: 100%; }
+    .work-card-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      opacity: 0.6;
+      margin-bottom: 20px;
+    }
+    .work-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+    .work-card p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(245,245,240,0.5);
+      flex-grow: 1;
+    }
+    .work-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .work-card-link:hover { opacity: 0.7; }
+    .work-card-link::after { content: '→'; }
+
+    @media (max-width: 900px) {
+      .work-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── PERSONAL LIFE ── */
+    #personal { background: #0d0d0d; }
+
+    .personal-intro {
+      max-width: 600px;
+      margin-bottom: 72px;
+    }
+    .personal-intro p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(245,245,240,0.65);
+    }
+
+.personal-card-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      opacity: 0.6;
+    }
+
+    .personal-card-content { position: relative; z-index: 1; }
+
+    /* ── PERSONAL BODY ── */
+    .personal-body { max-width: 1100px; display: flex; flex-direction: column; gap: 60px; }
+
+    .personal-block p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(245,245,240,0.7);
+    }
+    .personal-block p strong { color: var(--white); font-weight: 600; }
+
+    .personal-passions { }
+    .personal-passion-lead {
+      font-size: 0.95rem;
+      color: rgba(245,245,240,0.55);
+      margin-bottom: 24px;
+      margin-top: 10px;
+    }
+    .passion-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .passion-tags span {
+      background: var(--light-gray);
+      border: 1px solid rgba(201,169,110,0.15);
+      color: rgba(245,245,240,0.75);
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .passion-tags span:hover { border-color: var(--accent); color: var(--white); }
+
+    .personal-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+    .personal-prose-card {
+      background: var(--light-gray);
+      padding: 52px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .personal-prose-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .personal-prose-card:hover::before { width: 100%; }
+    .personal-prose-card .personal-card-icon { font-size: 1.8rem; margin-bottom: 18px; opacity: 0.6; }
+    .personal-prose-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .personal-prose-card p {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: rgba(245,245,240,0.6);
+    }
+
+    @media (max-width: 900px) {
+      .personal-cards-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--black); }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 100px;
+      max-width: 600px;
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(245,245,240,0.6);
+      margin-bottom: 48px;
+      max-width: 380px;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 18px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--white);
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      opacity: 0.65;
+      transition: opacity 0.2s;
+    }
+    .contact-link:hover { opacity: 1; }
+    .contact-link-icon {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover .contact-link-icon {
+      border-color: var(--accent);
+      background: rgba(201,169,110,0.08);
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.4);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: var(--light-gray);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--white);
+      padding: 16px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.25s;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 130px; }
+
+    .form-submit {
+      padding: 16px 44px;
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity 0.25s;
+    }
+    .form-submit:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 36px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-size: 0.75rem;
+      color: rgba(245,245,240,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 22px 28px; }
+      section { padding: 80px 28px; }
+      #home { padding: 0 28px 70px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-wrapper { grid-template-columns: 1fr; gap: 60px; }
+      .expertise-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .nav-links { gap: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .expertise-grid { grid-template-columns: 1fr; }
+      .about-stats { gap: 32px; }
+      .nav-links { display: none; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">JS</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">My Work</a></li>
+      <li><a href="#personal">Personal</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content fade-up">
+      <p class="hero-tag">Digital Media &amp; Marketing · Sales</p>
+      <h1 class="hero-name">Janice Singh</h1>
+      <p class="hero-sub">Creating meaningful connections between brands and people through strategy, story, and sales.</p>
+      <a href="#about" class="hero-cta">Discover More</a>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid fade-up">
+      <div class="about-image">
+        <div class="about-image-placeholder">JS</div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">About</p>
+        <h2 class="section-title">The Story<br>Behind the Work</h2>
+        <div class="divider"></div>
+        <p>Welcome to my professional portfolio.</p>
+        <p>Here you'll find a comprehensive overview of my work, professional experience, skills, and the passion that drives my practice in digital media.</p>
+        <p>My name is <strong>Janice Singh</strong>, though I'm often called <strong>Jan</strong>. I am currently in my third year at the <strong>University of Southern Queensland (UniSQ)</strong>, pursuing a Bachelor of Design and Interactive Technology with a major in Digital Media and a minor in Film. Alongside my design studies, I have gained valuable experience in programming and business.</p>
+        <p>I see every project as a chance to forge genuine connections, spark inspiration, and breathe life into characters and concepts through digital media. My professional development includes targeted workshops in digital design, animation, 3D modelling, interactive documentary, film, and business process management. Together, these experiences have shaped my artistic practice, built my confidence and discipline, and helped me cultivate a distinctive creative voice.</p>
+        <p>This site presents an intimate window into my portfolio, showcasing my work, training, and the evolving creative journey I am nurturing day by day. My aspiration is to grow steadily, learn deeply, and bring authenticity and heart to projects of true significance.</p>
+        <p><em>I let the work speak for itself. Each page reflects my personality, core values, and genuine dedication to the craft.</em></p>
+        <div class="about-stats">
+          <div>
+            <div class="stat-number">3+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div>
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Ideas in Progress</div>
+          </div>
+          <div>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Committed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 100px; max-width: 1100px;">
+      <p class="section-label fade-up">What I Do</p>
+      <h2 class="section-title fade-up">Areas of<br>Expertise</h2>
+      <div class="expertise-grid fade-up">
+        <div class="expertise-card">
+          <div class="card-number">01</div>
+          <div class="card-title">Digital Marketing</div>
+          <p class="card-desc">Strategy, Content Planning, Branding, and SMM.</p>
+        </div>
+        <div class="expertise-card">
+          <div class="card-number">02</div>
+          <div class="card-title">Digital Media</div>
+          <p class="card-desc">Concept Execution, Compelling Visuals, and Written Content.</p>
+        </div>
+        <div class="expertise-card">
+          <div class="card-number">03</div>
+          <div class="card-title">Sales</div>
+          <p class="card-desc">Building Relationships, Understanding Needs, and Closing with Confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MY WORK -->
+  <section id="work">
+    <p class="section-label fade-up">Portfolio</p>
+    <h2 class="section-title fade-up">My Work</h2>
+    <div class="work-grid fade-up">
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">01</div>
+          <h3>Personal Portfolio</h3>
+          <p>Self coded portfolio website. A comprehensive digital space showcasing my work, skills, and creative identity.</p>
+        </div>
+        <a href="http://127.0.0.1:5500/index.html" target="_blank" class="work-card-link">View Project</a>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">02</div>
+          <h3>Fitness &amp; Habit Tracker</h3>
+          <p>Self coded a website that tracks and records your fitness and lifestyle. Helping users build consistent habits and monitor their progress over time.</p>
+        </div>
+        <a href="http://127.0.0.1:5500/index.html" target="_blank" class="work-card-link">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONAL LIFE -->
+  <section id="personal">
+    <p class="section-label fade-up">Beyond Work</p>
+    <h2 class="section-title fade-up">Personal Life</h2>
+
+    <div class="personal-body fade-up">
+
+      <div class="personal-block">
+        <p>I'm a <strong>21 year old</strong> full time student and a part time sales representative for two different companies. I am an <strong>international student from Fiji</strong> — born and raised in Suva, Fiji, and spent most of my holidays growing up with my cousins in Sydney, Australia. I am a middle child in a trio of siblings, and we are a family of 5 including my parents.</p>
+        <p>My passion for digital creative art stems from my family. My father is an IT professional with an incredible ability to understand and fix almost any technology, while my mother has a highly creative mind that always inspired me. This unique blend of technical skill and creativity fascinated me from a young age. My friends, family, and peers describe me as <strong>bubbly, authentic, hardworking, ambitious, and a workaholic</strong>.</p>
+      </div>
+
+      <div class="personal-passions fade-up">
+        <p class="section-label">Passions &amp; Interests</p>
+        <p class="personal-passion-lead">Outside the industry, I'm passionate about many things outside of my professional life, such as:</p>
+        <div class="passion-tags">
+          <span>☕ Cafe Enthusiast</span>
+          <span>👗 Fashion Connoisseur</span>
+          <span>🛍️ Shopping</span>
+          <span>🍳 Experimenting in the Kitchen</span>
+          <span>🌊 Time by the Ocean</span>
+          <span>🚗 Panoramic Road Journeys</span>
+          <span>🥋 Judo &amp; Combat Sambo</span>
+          <span>🤍 Creating Memories</span>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label fade-up">Get In Touch</p>
+    <h2 class="section-title fade-up">Let's Connect</h2>
+
+    <div class="contact-wrapper fade-up">
+      <div class="contact-info">
+        <p>Whether you have a project in mind, a collaboration opportunity, or just an idea to connect, I'm always down for a chat.</p>
+        <div class="contact-links">
+          <a href="mailto:janicesingh_@hotmail.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            janicesingh_@hotmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/janicesingh2005" target="_blank" class="contact-link">
+            <div class="contact-link-icon">in</div>
+            linkedin.com/in/janicesingh2005
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 JS · Janice Singh. All rights reserved.</p>
+    <p>Digital Media · Marketing · Sales</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Contact form
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#2a2a2a';
+      btn.style.color = '#c9a96e';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
