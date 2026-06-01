@@ -83,7 +83,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.07) 0%, transparent 60%),
+      background: radial-gradient(ellipse at 70% 50%, rgba(140,107,143,0.12) 0%, transparent 60%),
                   linear-gradient(160deg, #111 0%, #0a0a0a 100%);
       z-index: 0;
     }
@@ -346,11 +346,33 @@
     .work-card-link:hover { opacity: 0.7; }
     .work-card-link::after { content: '→'; }
 
+    .work-card--wide { grid-column: span 2; }
+    .work-card-video {
+      width: 100%;
+      margin-top: 24px;
+      border: 1px solid rgba(140,107,143,0.15);
+      display: block;
+    }
+    .work-card-screenshots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .work-card-screenshots img {
+      width: 100%;
+      border: 1px solid rgba(140,107,143,0.15);
+      display: block;
+    }
+
     @media (max-width: 900px) {
       .work-grid { grid-template-columns: 1fr 1fr; }
+      .work-card--wide { grid-column: span 2; }
     }
     @media (max-width: 600px) {
       .work-grid { grid-template-columns: 1fr; }
+      .work-card--wide { grid-column: span 1; }
+      .work-card-screenshots { grid-template-columns: 1fr; }
     }
 
     /* ── PERSONAL LIFE ── */
@@ -378,9 +400,10 @@
     .personal-body { max-width: 1100px; display: flex; flex-direction: column; gap: 60px; }
 
     .personal-block p {
-      font-size: 1.05rem;
+      font-size: 1rem;
       line-height: 1.9;
       color: rgba(245,245,240,0.7);
+      margin-bottom: 28px;
     }
     .personal-block p strong { color: var(--white); font-weight: 600; }
 
@@ -621,10 +644,10 @@
         <div class="divider"></div>
         <p>Welcome to my professional portfolio.</p>
         <p>Here you'll find a comprehensive overview of my work, professional experience, skills, and the passion that drives my practice in digital media.</p>
-        <p>My name is <strong>Janice Singh</strong>, though I'm often called <strong>Jan</strong>. I am currently in my third year at the <strong>University of Southern Queensland (UniSQ)</strong>, pursuing a Bachelor of Design and Interactive Technology with a major in Digital Media and a minor in Film. Alongside my design studies, I have gained valuable experience in programming and business.</p>
+        <p>My name is Janice Singh, though I'm often called Jan. I am currently in my third year at the University of Southern Queensland (UniSQ), pursuing a Bachelor of Design and Interactive Technology with a major in Digital Media and a minor in Film. Alongside my design studies, I have gained valuable experience in programming and business.</p>
         <p>I see every project as a chance to forge genuine connections, spark inspiration, and breathe life into characters and concepts through digital media. My professional development includes targeted workshops in digital design, animation, 3D modelling, interactive documentary, film, and business process management. Together, these experiences have shaped my artistic practice, built my confidence and discipline, and helped me cultivate a distinctive creative voice.</p>
         <p>This site presents an intimate window into my portfolio, showcasing my work, training, and the evolving creative journey I am nurturing day by day. My aspiration is to grow steadily, learn deeply, and bring authenticity and heart to projects of true significance.</p>
-        <p><em>I let the work speak for itself. Each page reflects my personality, core values, and genuine dedication to the craft.</em></p>
+        <p>I let the work speak for itself. Each page reflects my personality, core values, and genuine dedication to the craft.</p>
         <div class="about-stats">
           <div>
             <div class="stat-number">3+</div>
@@ -676,15 +699,95 @@
           <h3>Personal Portfolio</h3>
           <p>Self coded portfolio website. A comprehensive digital space showcasing my work, skills, and creative identity.</p>
         </div>
-        <a href="http://127.0.0.1:5500/index.html" target="_blank" class="work-card-link">View Project</a>
+        <div class="work-card-screenshots" style="grid-template-columns: 1fr; margin-top: 24px;">
+          <img src="Coding_Portfolio_JaniceSingh.png" alt="Personal Portfolio Screenshot" />
+        </div>
       </div>
-      <div class="work-card">
+      <div class="work-card work-card--wide">
         <div>
           <div class="work-card-number">02</div>
           <h3>Fitness &amp; Habit Tracker</h3>
           <p>Self coded a website that tracks and records your fitness and lifestyle. Helping users build consistent habits and monitor their progress over time.</p>
         </div>
-        <a href="http://127.0.0.1:5500/index.html" target="_blank" class="work-card-link">View Project</a>
+        <div class="work-card-screenshots">
+          <img src="Routine_Rise1_JaniceSingh.png" alt="RoutineRise Screenshot 1" />
+          <img src="Routine_Rise2_JaniceSingh.png" alt="RoutineRise Screenshot 2" />
+        </div>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">03</div>
+          <h3>Product Packaging</h3>
+          <p>Used branding concepts and designs for an energy drink under a fictional brand First Foods. Developed the visual identity, packaging, and brand language.</p>
+        </div>
+        <a href="Can_Branding_JaniceSingh.pdf" target="_blank" class="work-card-link">View PDF</a>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">04</div>
+          <h3>Song Poster</h3>
+          <p>A creative poster design project based on music. Combing typography, visual composition, and design principles to bring the song to life. About You by The 1975.</p>
+        </div>
+        <a href="Song_Poster_JaniceSingh.pdf" target="_blank" class="work-card-link">View PDF</a>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">05</div>
+          <h3>Coco Chanel Brand Poster</h3>
+          <p>A brand poster design inspired by the fashion icon Coco Chanel. Exploring luxury aesthetics, typographic elegance, and timeless visuals.</p>
+        </div>
+        <a href="Chanel_Brand_Poster_JaniceSingh.pdf" target="_blank" class="work-card-link">View PDF</a>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">06</div>
+          <h3>Project Prototype</h3>
+          <p>A prototype project exploring design and interactive concepts. Developed as part of my studies in Digital Media and Interactive Technology.</p>
+        </div>
+        <a href="BNE_City_Hall_JaniceSingh.pdf" target="_blank" class="work-card-link">View PDF</a>
+      </div>
+      <div class="work-card work-card--wide">
+        <div>
+          <div class="work-card-number">07</div>
+          <h3>Travel Agency Advert</h3>
+          <p>Created an advertisement for a fictional travel company named Travel First, with Turkey as the chosen destination. Combining motion, visuals, and storytelling to promote travel through digital media.</p>
+        </div>
+        <video class="work-card-video" controls>
+          <source src="Travel_First_JaniceSingh.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="work-card work-card--wide">
+        <div>
+          <div class="work-card-number">08</div>
+          <h3>Animated Show Poster</h3>
+          <p>Created a handmade poster of my favorite animated piece.</p>
+        </div>
+        <div class="work-card-screenshots">
+          <img src="OnePiece_Luffy_JaniceSingh.png" alt="One Piece Poster" />
+          <img src="OnePiece_Logo_JaniceSingh.png" alt="One Piece Logo" />
+        </div>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">09</div>
+          <h3>Interactive Documentary</h3>
+          <p>Worked as Production Design and ID Designer on a project based on the Queensland Rail Museum.</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">10</div>
+          <h3>Costume Manager, Lighting &amp; Audio</h3>
+          <p>Worked across two University projects. A Promotional Video for Vinnies and a Music Video, taking on roles in costume management, lighting, and audio.</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div>
+          <div class="work-card-number">11</div>
+          <h3>Game Designer</h3>
+          <p>Made an escape room game using Unreal Engine. Designing the environment, mechanics, and interactive experience from the ground up.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -697,8 +800,8 @@
     <div class="personal-body fade-up">
 
       <div class="personal-block">
-        <p>I'm a <strong>21 year old</strong> full time student and a part time sales representative for two different companies. I am an <strong>international student from Fiji</strong> — born and raised in Suva, Fiji, and spent most of my holidays growing up with my cousins in Sydney, Australia. I am a middle child in a trio of siblings, and we are a family of 5 including my parents.</p>
-        <p>My passion for digital creative art stems from my family. My father is an IT professional with an incredible ability to understand and fix almost any technology, while my mother has a highly creative mind that always inspired me. This unique blend of technical skill and creativity fascinated me from a young age. My friends, family, and peers describe me as <strong>bubbly, authentic, hardworking, ambitious, and a workaholic</strong>.</p>
+        <p>I'm a 21 year old full time student and a part time sales representative for two different companies. I am an international student from Fiji; however I've spent most of my holidays growing up with my cousins in Sydney, Australia. I am a middle child in a trio of siblings, and we are a family of 5 including my parents.</p>
+        <p>My passion for digital creative art stems from my family. My father is an IT professional with an incredible ability to understand and fix almost any technology, while my mother has a highly creative mind that always inspired me. This unique blend of technical skill and creativity fascinated me from a young age. My friends, family, and peers describe me as bubbly, authentic, hardworking, ambitious, and a workaholic.</p>
       </div>
 
       <div class="personal-passions fade-up">
