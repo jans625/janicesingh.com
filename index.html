@@ -588,10 +588,56 @@
       .nav-links { gap: 24px; }
     }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.97);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
     @media (max-width: 600px) {
       .expertise-grid { grid-template-columns: 1fr; }
       .about-stats { gap: 32px; }
       .nav-links { display: none; }
+      .hamburger { display: flex; }
     }
 
     /* ── FADE IN ── */
@@ -615,7 +661,18 @@
       <li><a href="#personal">Personal</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMobile()">Home</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#work" onclick="closeMobile()">My Work</a>
+    <a href="#personal" onclick="closeMobile()">Personal</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
 
   <!-- HOME -->
   <section id="home">
@@ -720,7 +777,10 @@
           <h3>Product Packaging</h3>
           <p>Used branding concepts and designs for an energy drink under a fictional brand First Foods. Developed the visual identity, packaging, and brand language.</p>
         </div>
-        <a href="Can_Branding_JaniceSingh.pdf" target="_blank" class="work-card-link">View PDF</a>
+        <div class="work-card-screenshots">
+          <img src="Product_Package_Front_JaniceSingh.png" alt="Product Packaging Front" style="grid-column: 1 / -1;" />
+          <img src="Product_Package_Back_JaniceSingh.png" alt="Product Packaging Back" style="grid-column: 1 / -1;" />
+        </div>
       </div>
       <div class="work-card">
         <div>
@@ -728,7 +788,9 @@
           <h3>Song Poster</h3>
           <p>A creative poster design project based on music. Combing typography, visual composition, and design principles to bring the song to life. About You by The 1975.</p>
         </div>
-        <a href="Song_Poster_JaniceSingh.pdf" target="_blank" class="work-card-link">View PDF</a>
+        <div class="work-card-screenshots" style="grid-template-columns: 1fr; margin-top: 24px;">
+          <img src="Song_Poster_JaniceSingh.png" alt="Song Poster - About You by The 1975" />
+        </div>
       </div>
       <div class="work-card">
         <div>
@@ -852,6 +914,18 @@
   </footer>
 
   <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
     // Nav scroll effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
